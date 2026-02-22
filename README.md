@@ -1,7 +1,7 @@
 
 # E-Shop - Full-Stack E-Commerce Platform
 
-A modern, feature-rich e-commerce platform built with Next.js 16, Prisma, and PostgreSQL. This application provides a complete online shopping experience with admin management, user authentication, and comprehensive product catalog.
+A modern, feature-rich e-commerce platform built with Next.js 16, Prisma, and PostgreSQL for Cyber Legends. This application provides a complete online shopping experience with admin management, user authentication, and comprehensive product catalog.
 
 ## 🚀 Features
 

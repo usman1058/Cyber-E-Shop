@@ -354,9 +354,8 @@ async function main() {
     data: {
       name: 'Welcome Discount',
       slug: 'welcome-10',
-      type: 'promo',
-      discount: 10,
-      discountType: 'percentage',
+      type: 'percentage',
+      value: 10,
       startDate: new Date(),
       endDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000),
       products: JSON.stringify(['all']),
