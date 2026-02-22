@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
       email: u.email || 'No Email',
       role: u.role, // "admin" or "customer"
       adminRole: u.adminRole?.name || null,
-      status: u.status,
+      status: u.isActive ? 'active' : 'inactive',
       orderCount: u.orders.length,
       totalSpent: u.orders.reduce((acc, current) => acc + (current.total || 0), 0),
       lastLogin: u.updatedAt.toISOString(), // Simplified for now
@@ -44,11 +44,12 @@ export async function PATCH(request: NextRequest) {
   try {
     const body = await request.json();
     const { userId, status, role } = body;
+    const isActive = status === 'active' ? true : status === 'inactive' ? false : undefined;
 
     const user = await db.user.update({
       where: { id: userId },
       data: {
-        status: status !== undefined ? status : undefined,
+        isActive: isActive !== undefined ? isActive : undefined,
         role: role !== undefined ? role : undefined
       }
     });

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft, Send, Paperclip, AlertTriangle, Clock, CheckCircle, User, Bot } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -81,7 +81,9 @@ const mockMessages: Message[] = [
   },
 ];
 
-export default function TicketDetailPage({ params }: { params: { id: string } }) {
+export default function TicketDetailPage() {
+  const params = useParams();
+  const id = params.id as string;
   const router = useRouter();
   const { toast } = useToast();
 
@@ -311,8 +313,8 @@ export default function TicketDetailPage({ params }: { params: { id: string } })
                     <div className={`flex-1 max-w-[80%] ${message.isAdmin ? '' : 'text-right'}`}>
                       <div
                         className={`inline-block rounded-lg p-4 ${message.isAdmin
-                            ? 'bg-muted text-left'
-                            : 'bg-primary text-primary-foreground text-left'
+                          ? 'bg-muted text-left'
+                          : 'bg-primary text-primary-foreground text-left'
                           }`}
                       >
                         <div className="flex items-center gap-2 mb-2">

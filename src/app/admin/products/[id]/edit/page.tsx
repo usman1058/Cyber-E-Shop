@@ -1,14 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { ProductForm } from '@/components/admin/product-form';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'sonner';
 
-export default function EditProductPage({ params }: { params: { id: string } }) {
+export default function EditProductPage() {
+  const params = useParams();
+  const id = params.id as string;
   const [product, setProduct] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
@@ -16,7 +18,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`/api/admin/products/${params.id}`);
+        const response = await fetch(`/api/admin/products/${id}`);
         const data = await response.json();
         if (data.success) {
           setProduct(data.data);
@@ -33,7 +35,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
       }
     };
     fetchProduct();
-  }, [params.id, router]);
+  }, [id, router]);
 
   if (isLoading) {
     return (
@@ -61,7 +63,7 @@ export default function EditProductPage({ params }: { params: { id: string } }) 
         </div>
       </div>
 
-      <ProductForm initialData={product} productId={params.id} />
+      <ProductForm initialData={product} productId={id} />
     </div>
   );
 }

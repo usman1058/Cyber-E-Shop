@@ -2,7 +2,7 @@
 
 import { PageLayout } from '@/components/layout/page-layout'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import Link from 'next/link'
+import Link from 'next/link';
 import { Home, ShoppingBag, FileText, HelpCircle, Users, Building2, Map, BookOpen, SeparatorHorizontal } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 

@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
         // Create new account with a temporary password
         tempPassword = Math.random().toString(36).slice(-10)
         const hashedPassword = await bcrypt.hash(tempPassword, 10)
-        
+
         user = await db.user.create({
           data: {
             email: shippingAddress.email,
@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
     // Guest conversion might have already happened, so we prioritize the cart 
     // that actually HAS the items (usually linked to sessionId for guests)
     const sessionIdFromItems = items[0]?.sessionId || body.sessionId
-    
+
     const cart = await db.cart.findFirst({
       where: {
         OR: [
@@ -284,9 +284,9 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({
       success: true,
       promoCode: promoCode.toUpperCase(),
-      discount: promo.discount,
-      discountType: promo.discountType,
-      description: `${promo.name}: ${promo.discountType === 'percentage' ? `${promo.discount * 100}% off` : `$${promo.discount} off`}`,
+      discount: promo.value,
+      discountType: promo.type,
+      description: `${promo.name}: ${promo.type === 'percentage' ? `${promo.value}% off` : `$${promo.value} off`}`,
       message: `Promo code applied: ${promo.name}`,
     })
 

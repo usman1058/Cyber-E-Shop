@@ -38,6 +38,7 @@ interface BehaviorData {
   carts: number;
   checkouts: number;
   searches: number;
+  topPages: { page: string; views: number; avgTime: number }[];
 }
 
 export default function BehaviorAnalyticsPage() {
@@ -147,7 +148,7 @@ export default function BehaviorAnalyticsPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {data.topPages.map((page) => (
+                {data?.topPages?.map((page) => (
                   <TableRow key={page.page}>
                     <TableCell className="font-medium text-primary">{page.page}</TableCell>
                     <TableCell className="text-right">{page.views.toLocaleString()}</TableCell>

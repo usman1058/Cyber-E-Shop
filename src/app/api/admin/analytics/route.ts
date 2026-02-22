@@ -51,7 +51,7 @@ export async function GET(request: NextRequest) {
 
         // Revenue Trend (grouped by day/month)
         // For simplicity, we'll return the last 'days' days of data
-        const trend = [];
+        const trend: { date: string; revenue: number }[] = [];
         for (let i = days; i >= 0; i--) {
             const d = subDays(now, i);
             const dayStart = startOfDay(d);

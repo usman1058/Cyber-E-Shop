@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -29,14 +30,31 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
 import { Loader2, Plus, Trash2, Image as ImageIcon } from 'lucide-react';
 
-const productSchema = z.object({
+interface ProductFormValues {
+  name: string;
+  sku: string;
+  slug: string;
+  description: string;
+  price: number;
+  comparePrice: number;
+  cost: number;
+  stock: number;
+  categoryId: string;
+  brandId: string;
+  images: string;
+  featured: boolean;
+  active: boolean;
+  isNew: boolean;
+}
+
+const productSchema: z.ZodType<ProductFormValues> = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   sku: z.string().min(3, 'SKU must be at least 3 characters'),
   slug: z.string().min(2, 'Slug must be at least 2 characters'),
-  description: z.string().optional(),
+  description: z.string().default(''),
   price: z.coerce.number().min(0, 'Price must be positive'),
-  comparePrice: z.coerce.number().optional(),
-  cost: z.coerce.number().optional(),
+  comparePrice: z.coerce.number().default(0),
+  cost: z.coerce.number().default(0),
   stock: z.coerce.number().min(0, 'Stock must be positive'),
   categoryId: z.string().min(1, 'Please select a category'),
   brandId: z.string().min(1, 'Please select a brand'),
@@ -45,8 +63,6 @@ const productSchema = z.object({
   active: z.boolean().default(true),
   isNew: z.boolean().default(false),
 });
-
-type ProductFormValues = z.infer<typeof productSchema>;
 
 interface ProductFormProps {
   initialData?: any;
@@ -61,7 +77,7 @@ export function ProductForm({ initialData, productId }: ProductFormProps) {
   const [isFetchingMetadata, setIsFetchingMetadata] = useState(true);
 
   const form = useForm<ProductFormValues>({
-    resolver: zodResolver(productSchema),
+    resolver: zodResolver(productSchema as any),
     defaultValues: initialData || {
       name: '',
       sku: '',
