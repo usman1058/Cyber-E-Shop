@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   description: "Modern e-commerce platform for high-end gadgets and electronics.",
   keywords: ["E-commerce", "Next.js", "Electronics", "Tech", "CyberShop"],
   icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
+    icon: "https://cyber-e-shop.vercel.app/logo.svg",
   },
 };
 
