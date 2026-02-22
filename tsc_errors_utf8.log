@@ -1,0 +1,263 @@
+﻿.next/dev/types/validator.ts(233,39): error TS2306: File 'E:/Projects/React/eshop/src/app/admin/backup/page.tsx' is not a module.
+.next/dev/types/validator.ts(1278,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/blog/[slug]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/blog/[slug]">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { slug: string; }; }) => Promise<NextResponse<{ error: string; }> | NextResponse<{ post: { tags: any; id: string; createdAt: Date; updatedAt: Date; ... 8 more ...; publishedAt: Date | null; }; relatedPosts: { ...; }[]; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ slug: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ slug: string; }>; }' is not assignable to type '{ params: { slug: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'slug' is missing in type 'Promise<{ slug: string; }>' but required in type '{ slug: string; }'.
+.next/dev/types/validator.ts(1296,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/brands/[slug]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/brands/[slug]">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { slug: string; }; }) => Promise<NextResponse<{ error: string; }> | NextResponse<{ brand: { products: any; name: string; id: string; createdAt: Date; ... 4 more ...; story: string | null; }; pagination: null; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ slug: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ slug: string; }>; }' is not assignable to type '{ params: { slug: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'slug' is missing in type 'Promise<{ slug: string; }>' but required in type '{ slug: string; }'.
+.next/dev/types/validator.ts(1332,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/categories/[slug]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/categories/[slug]">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { slug: string; }; }) => Promise<NextResponse<{ error: string; }> | NextResponse<{ category: { products: { images: any; specs: any; name: string; ... 17 more ...; active: boolean; }[] | undefined; ... 9 more ...; parentId: string | null; }; pagination: null; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ slug: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ slug: string; }>; }' is not assignable to type '{ params: { slug: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'slug' is missing in type 'Promise<{ slug: string; }>' but required in type '{ slug: string; }'.
+.next/dev/types/validator.ts(1431,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/orders/[id]/cancel/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/orders/[id]/cancel">'.
+  Types of property 'POST' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ error: string; }> | NextResponse<{ success: boolean; message: string; orderId: string; cancelledAt: string; refund: { ...; }; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/dev/types/validator.ts(1440,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/orders/[id]/refund/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/orders/[id]/refund">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; refunds: { refundId: string; orderId: string; type: string; amount: number; status: string; createdAt: string; processedAt: string; items: { ...; }[]; }[]; }> | NextResponse<...>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/dev/types/validator.ts(1449,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/orders/[id]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/orders/[id]">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; order: { orderId: string; userId: string; status: string; trackingNumber: string; carrier: string; ... 8 more ...; updatedAt: string; }; }> | NextResponse<...>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/dev/types/validator.ts(1458,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/orders/[id]/track/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/orders/[id]/track">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; tracking: { orderId: string; trackingNumber: string; carrier: string; status: string; estimatedDelivery: string; currentLocation: string; timeline: ({ ...; } | { ...; })[]; }; }> | NextResponse<...>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/dev/types/validator.ts(1476,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/products/[slug]/reviews/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/products/[slug]/reviews">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { slug: string; }; }) => Promise<NextResponse<{ success: boolean; reviews: { id: string; productSlug: string; userId: string; userName: string; rating: number; ... 5 more ...; createdAt: string; }[]; total: number; averageRating: number; distribution: { ...; }; }> | NextR...' is not assignable to type '(request: NextRequest, context: { params: Promise<{ slug: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ slug: string; }>; }' is not assignable to type '{ params: { slug: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'slug' is missing in type 'Promise<{ slug: string; }>' but required in type '{ slug: string; }'.
+.next/dev/types/validator.ts(1521,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/reviews/[id]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/reviews/[id]">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; review: { id: string; productId: string; userId: string; userName: string; rating: number; title: string; ... 4 more ...; createdAt: string; }; }> | NextResponse<...>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/dev/types/validator.ts(1575,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/support/tickets/[id]/messages/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/support/tickets/[id]/messages">'.
+  Types of property 'POST' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; message: string; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/dev/types/validator.ts(1593,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/user/addresses/[id]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/user/addresses/[id]">'.
+  Types of property 'PUT' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ error: string; }> | NextResponse<{ success: boolean; message: string; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/dev/types/validator.ts(1620,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/user/payment-methods/[id]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/user/payment-methods/[id]">'.
+  Types of property 'PUT' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ error: string; }> | NextResponse<{ success: boolean; message: string; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/types/validator.ts(233,39): error TS2306: File 'E:/Projects/React/eshop/src/app/admin/backup/page.tsx' is not a module.
+.next/types/validator.ts(1278,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/blog/[slug]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/blog/[slug]">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { slug: string; }; }) => Promise<NextResponse<{ error: string; }> | NextResponse<{ post: { tags: any; id: string; createdAt: Date; updatedAt: Date; ... 8 more ...; publishedAt: Date | null; }; relatedPosts: { ...; }[]; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ slug: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ slug: string; }>; }' is not assignable to type '{ params: { slug: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'slug' is missing in type 'Promise<{ slug: string; }>' but required in type '{ slug: string; }'.
+.next/types/validator.ts(1296,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/brands/[slug]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/brands/[slug]">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { slug: string; }; }) => Promise<NextResponse<{ error: string; }> | NextResponse<{ brand: { products: any; name: string; id: string; createdAt: Date; ... 4 more ...; story: string | null; }; pagination: null; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ slug: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ slug: string; }>; }' is not assignable to type '{ params: { slug: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'slug' is missing in type 'Promise<{ slug: string; }>' but required in type '{ slug: string; }'.
+.next/types/validator.ts(1332,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/categories/[slug]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/categories/[slug]">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { slug: string; }; }) => Promise<NextResponse<{ error: string; }> | NextResponse<{ category: { products: { images: any; specs: any; name: string; ... 17 more ...; active: boolean; }[] | undefined; ... 9 more ...; parentId: string | null; }; pagination: null; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ slug: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ slug: string; }>; }' is not assignable to type '{ params: { slug: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'slug' is missing in type 'Promise<{ slug: string; }>' but required in type '{ slug: string; }'.
+.next/types/validator.ts(1431,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/orders/[id]/cancel/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/orders/[id]/cancel">'.
+  Types of property 'POST' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ error: string; }> | NextResponse<{ success: boolean; message: string; orderId: string; cancelledAt: string; refund: { ...; }; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/types/validator.ts(1440,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/orders/[id]/refund/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/orders/[id]/refund">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; refunds: { refundId: string; orderId: string; type: string; amount: number; status: string; createdAt: string; processedAt: string; items: { ...; }[]; }[]; }> | NextResponse<...>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/types/validator.ts(1449,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/orders/[id]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/orders/[id]">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; order: { orderId: string; userId: string; status: string; trackingNumber: string; carrier: string; ... 8 more ...; updatedAt: string; }; }> | NextResponse<...>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/types/validator.ts(1458,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/orders/[id]/track/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/orders/[id]/track">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; tracking: { orderId: string; trackingNumber: string; carrier: string; status: string; estimatedDelivery: string; currentLocation: string; timeline: ({ ...; } | { ...; })[]; }; }> | NextResponse<...>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/types/validator.ts(1476,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/products/[slug]/reviews/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/products/[slug]/reviews">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { slug: string; }; }) => Promise<NextResponse<{ success: boolean; reviews: { id: string; productSlug: string; userId: string; userName: string; rating: number; ... 5 more ...; createdAt: string; }[]; total: number; averageRating: number; distribution: { ...; }; }> | NextR...' is not assignable to type '(request: NextRequest, context: { params: Promise<{ slug: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ slug: string; }>; }' is not assignable to type '{ params: { slug: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'slug' is missing in type 'Promise<{ slug: string; }>' but required in type '{ slug: string; }'.
+.next/types/validator.ts(1521,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/reviews/[id]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/reviews/[id]">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; review: { id: string; productId: string; userId: string; userName: string; rating: number; title: string; ... 4 more ...; createdAt: string; }; }> | NextResponse<...>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/types/validator.ts(1575,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/support/tickets/[id]/messages/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/support/tickets/[id]/messages">'.
+  Types of property 'POST' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; message: string; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/types/validator.ts(1593,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/user/addresses/[id]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/user/addresses/[id]">'.
+  Types of property 'PUT' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ error: string; }> | NextResponse<{ success: boolean; message: string; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/types/validator.ts(1620,31): error TS2344: Type 'typeof import("E:/Projects/React/eshop/src/app/api/user/payment-methods/[id]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/user/payment-methods/[id]">'.
+  Types of property 'PUT' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ error: string; }> | NextResponse<{ success: boolean; message: string; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+examples/websocket/frontend.tsx(4,20): error TS2307: Cannot find module 'socket.io-client' or its corresponding type declarations.
+examples/websocket/server.ts(2,24): error TS2307: Cannot find module 'socket.io' or its corresponding type declarations.
+skills/frontend-design/examples/typescript/sample-components.tsx(107,11): error TS2430: Interface 'InputProps' incorrectly extends interface 'InputHTMLAttributes<HTMLInputElement>'.
+  Types of property 'size' are incompatible.
+    Type '"lg" | "md" | "sm" | undefined' is not assignable to type 'number | undefined'.
+      Type 'string' is not assignable to type 'number'.
+skills/frontend-design/examples/typescript/theme-provider.tsx(237,54): error TS2503: Cannot find namespace 'JSX'.
+src/app/admin/ab-testing/page.tsx(104,11): error TS2741: Property 'startDate' is missing in type '{ id: string; name: string; description: string; status: "draft"; type: "content"; variants: { id: string; name: string; traffic: number; conversionRate: number; participants: number; }[]; significance: number; created: string; }' but required in type 'Experiment'.
+src/app/admin/algorithms/page.tsx(387,22): error TS2304: Cannot find name 'Separator'.
+src/app/admin/analytics/inventory/page.tsx(84,20): error TS2304: Cannot find name 'DollarSign'.
+src/app/admin/analytics/support/page.tsx(149,18): error TS2304: Cannot find name 'CardDescription'.
+src/app/admin/analytics/support/page.tsx(149,72): error TS2304: Cannot find name 'CardDescription'.
+src/app/admin/analytics/support/page.tsx(161,40): error TS2551: Property 'avgResponseTime' does not exist on type '{ name: string; totalTickets: number; avgResponse: string; slaRate: string; }'. Did you mean 'avgResponse'?
+src/app/admin/login/page.tsx(189,14): error TS2304: Cannot find name 'Separator'.
+src/app/admin/reset-password/page.tsx(5,10): error TS2614: Module '"next/link"' has no exported member 'Link'. Did you mean to use 'import Link from "next/link"' instead?
+src/app/admin/shipments/page.tsx(453,40): error TS2304: Cannot find name 'Separator'.
+src/app/api/admin/auth/login/route.ts(62,60): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(password: string, hash: string): Promise<boolean>', gave the following error.
+    Argument of type 'string | null' is not assignable to parameter of type 'string'.
+      Type 'null' is not assignable to type 'string'.
+  Overload 2 of 2, '(password: string, hash: string, callback?: Callback<boolean> | undefined, progressCallback?: ProgressCallback | undefined): void', gave the following error.
+    Argument of type 'string | null' is not assignable to parameter of type 'string'.
+      Type 'null' is not assignable to type 'string'.
+src/app/api/auth/login/route.ts(37,60): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(password: string, hash: string): Promise<boolean>', gave the following error.
+    Argument of type 'string | null' is not assignable to parameter of type 'string'.
+      Type 'null' is not assignable to type 'string'.
+  Overload 2 of 2, '(password: string, hash: string, callback?: Callback<boolean> | undefined, progressCallback?: ProgressCallback | undefined): void', gave the following error.
+    Argument of type 'string | null' is not assignable to parameter of type 'string'.
+      Type 'null' is not assignable to type 'string'.
+src/app/api/brands/[slug]/route.ts(41,7): error TS2322: Type '{ page: number; limit: number; total: number; totalPages: number; }' is not assignable to type 'null'.
+src/app/api/brands/[slug]/route.ts(53,19): error TS2339: Property 'products' does not exist on type '{ name: string; id: string; createdAt: Date; updatedAt: Date; description: string | null; slug: string; logo: string | null; story: string | null; }'.
+src/app/api/cart/route.ts(20,7): error TS2322: Type '{ userId: string; } | { sessionId: string | null; }' is not assignable to type 'CartWhereInput | undefined'.
+  Type '{ sessionId: string | null; }' is not assignable to type 'CartWhereInput'.
+    Types of property 'sessionId' are incompatible.
+      Type 'string | null' is not assignable to type 'string | StringFilter<"Cart"> | undefined'.
+        Type 'null' is not assignable to type 'string | StringFilter<"Cart"> | undefined'.
+src/app/api/cart/route.ts(24,13): error TS2353: Object literal may only specify known properties, and 'product' does not exist in type 'CartItemInclude<DefaultArgs>'.
+src/app/api/cart/route.ts(39,27): error TS2339: Property 'items' does not exist on type '{ id: string; userId: string | null; sessionId: string; createdAt: Date; updatedAt: Date; }'.
+src/app/api/cart/route.ts(46,19): error TS2339: Property 'items' does not exist on type '{ id: string; userId: string | null; sessionId: string; createdAt: Date; updatedAt: Date; }'.
+src/app/api/cart/route.ts(113,7): error TS2322: Type '{ userId: any; } | { sessionId: any; }' is not assignable to type 'CartWhereUniqueInput'.
+  Type '{ userId: any; }' is not assignable to type 'CartWhereUniqueInput'.
+    Type '{ userId: any; }' is not assignable to type '{ id: string; sessionId: string; } & { id?: string | undefined; sessionId?: string | undefined; AND?: CartWhereInput | CartWhereInput[] | undefined; ... 6 more ...; items?: CartItemListRelationFilter | undefined; }'.
+      Type '{ userId: any; }' is missing the following properties from type '{ id: string; sessionId: string; }': id, sessionId
+src/app/api/cart/route.ts(205,17): error TS2353: Object literal may only specify known properties, and 'product' does not exist in type 'CartItemInclude<DefaultArgs>'.
+src/app/api/cart/route.ts(221,18): error TS2551: Property 'product' does not exist on type '{ id: string; createdAt: Date; updatedAt: Date; cartId: string; productId: string; productName: string; productSlug: string | null; productImage: string | null; quantity: number; unitPrice: number; totalPrice: number; }'. Did you mean 'productId'?
+src/app/api/cart/route.ts(233,41): error TS2551: Property 'product' does not exist on type '{ id: string; createdAt: Date; updatedAt: Date; cartId: string; productId: string; productName: string; productSlug: string | null; productImage: string | null; quantity: number; unitPrice: number; totalPrice: number; }'. Did you mean 'productId'?
+src/app/api/categories/[slug]/route.ts(43,7): error TS2322: Type '{ page: number; limit: number; total: number; totalPages: number; }' is not assignable to type 'null'.
+src/app/api/compatibility/route.ts(56,27): error TS2339: Property 'requirements' does not exist on type '{ compatible: boolean; compatibilityScore: number; products: any; issues: never[]; recommendations: string[]; }'.
+src/app/api/compatibility/route.ts(57,27): error TS2339: Property 'allRequirementsMet' does not exist on type '{ compatible: boolean; compatibilityScore: number; products: any; issues: never[]; recommendations: string[]; }'.
+src/app/api/search/route.ts(52,47): error TS2353: Object literal may only specify known properties, and 'mode' does not exist in type 'StringFilter<"Product">'.
+src/app/api/search/route.ts(53,54): error TS2353: Object literal may only specify known properties, and 'mode' does not exist in type 'StringNullableFilter<"Product">'.
+src/app/api/search/route.ts(65,47): error TS2353: Object literal may only specify known properties, and 'mode' does not exist in type 'StringFilter<"Product">'.
+src/app/api/search/route.ts(66,54): error TS2353: Object literal may only specify known properties, and 'mode' does not exist in type 'StringNullableFilter<"Product">'.
+src/app/api/search/route.ts(84,45): error TS2353: Object literal may only specify known properties, and 'mode' does not exist in type 'StringFilter<"Brand">'.
+src/app/api/search/route.ts(85,52): error TS2353: Object literal may only specify known properties, and 'mode' does not exist in type 'StringNullableFilter<"Brand">'.
+src/app/api/search/route.ts(99,45): error TS2353: Object literal may only specify known properties, and 'mode' does not exist in type 'StringFilter<"Category">'.
+src/app/api/search/route.ts(100,52): error TS2353: Object literal may only specify known properties, and 'mode' does not exist in type 'StringNullableFilter<"Category">'.
+src/app/api/wishlist/route.ts(20,9): error TS2353: Object literal may only specify known properties, and 'product' does not exist in type 'WishlistItemInclude<DefaultArgs>'.
+src/app/api/wishlist/route.ts(72,7): error TS2322: Type '{ userId: any; productId: any; }' is not assignable to type 'WishlistItemWhereUniqueInput'.
+  Type '{ userId: any; productId: any; }' is not assignable to type '{ id: string; userId_productId: WishlistItemUserIdProductIdCompoundUniqueInput; } & { id?: string | undefined; userId_productId?: WishlistItemUserIdProductIdCompoundUniqueInput | undefined; ... 13 more ...; user?: (Without<...> & UserWhereInput) | ... 1 more ... | undefined; }'.
+    Type '{ userId: any; productId: any; }' is missing the following properties from type '{ id: string; userId_productId: WishlistItemUserIdProductIdCompoundUniqueInput; }': id, userId_productId
+src/app/checkout/failure/page.tsx(39,16): error TS2552: Cannot find name 'Alert'. Did you mean 'alert'?
+src/app/checkout/failure/page.tsx(47,17): error TS2304: Cannot find name 'Alert'.
+src/app/compare/page.tsx(165,24): error TS2304: Cannot find name 'Link'.
+src/app/compare/page.tsx(173,25): error TS2304: Cannot find name 'Link'.
+src/app/compare/page.tsx(176,24): error TS2304: Cannot find name 'Link'.
+src/app/compare/page.tsx(180,25): error TS2304: Cannot find name 'Link'.
+src/app/cookie/page.tsx(65,16): error TS2304: Cannot find name 'CardHeader'.
+src/app/cookie/page.tsx(66,18): error TS2304: Cannot find name 'CardTitle'.
+src/app/cookie/page.tsx(66,60): error TS2304: Cannot find name 'CardTitle'.
+src/app/cookie/page.tsx(67,17): error TS2304: Cannot find name 'CardHeader'.
+src/app/locations/page.tsx(201,20): error TS2304: Cannot find name 'Button'.
+src/app/locations/page.tsx(203,21): error TS2304: Cannot find name 'Button'.
+src/app/new-arrivals/page.tsx(54,14): error TS2304: Cannot find name 'Badge'.
+src/app/new-arrivals/page.tsx(54,46): error TS2304: Cannot find name 'Badge'.
+src/app/product/[slug]/page.tsx(739,18): error TS2304: Cannot find name 'ProductCard'.
+src/app/promotions/page.tsx(129,21): error TS2322: Type '{ name: string; slug: string; price: number; originalPrice: number; discountedPrice: number; discount: any; image: string; endDate: any; type: any; flash: true; }' is not assignable to type 'IntrinsicAttributes & DealCardProps'.
+  Property 'price' does not exist on type 'IntrinsicAttributes & DealCardProps'.
+src/app/search/page.tsx(10,10): error TS2305: Module '"next/navigation"' has no exported member 'useState'.
+src/app/search/page.tsx(10,20): error TS2305: Module '"next/navigation"' has no exported member 'useEffect'.
+src/app/search/page.tsx(155,22): error TS2304: Cannot find name 'Link'.
+src/app/search/page.tsx(164,23): error TS2304: Cannot find name 'Link'.
+src/app/search/page.tsx(191,18): error TS2304: Cannot find name 'Link'.
+src/app/search/page.tsx(195,19): error TS2304: Cannot find name 'Link'.
+src/app/seo/[...slug]/page.tsx(60,37): error TS2353: Object literal may only specify known properties, and 'mode' does not exist in type 'StringFilter<"Category">'.
+src/app/seo/[...slug]/page.tsx(81,39): error TS2353: Object literal may only specify known properties, and 'mode' does not exist in type 'StringFilter<"Product">'.
+src/app/seo/[...slug]/page.tsx(82,46): error TS2353: Object literal may only specify known properties, and 'mode' does not exist in type 'StringNullableFilter<"Product">'.
+src/app/seo/[slug]/page.tsx(265,12): error TS2304: Cannot find name 'CardHeader'.
+src/app/seo/[slug]/page.tsx(267,13): error TS2304: Cannot find name 'CardHeader'.
+src/app/session-expired/page.tsx(41,20): error TS2304: Cannot find name 'AlertDescription'.
+src/app/session-expired/page.tsx(48,21): error TS2304: Cannot find name 'AlertDescription'.
+src/app/session-expired/page.tsx(104,1): error TS2304: Cannot find name 'AlertDescription'.

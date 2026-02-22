@@ -1,0 +1,19 @@
+{
+    "items": [
+        {
+            "sessionId": "test-session-123"
+        }
+    ],
+    "shippingAddress": {
+        "fullName": "Test User",
+        "phone": "1234567890",
+        "address": "123 Test St",
+        "city": "Test City",
+        "state": "TS",
+        "postalCode": "12345",
+        "country": "USA",
+        "email": "test@example.com"
+    },
+    "shippingMethod": "Standard",
+    "paymentMethod": "COD"
+}

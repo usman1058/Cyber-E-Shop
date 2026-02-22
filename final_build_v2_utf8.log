@@ -1,0 +1,203 @@
+﻿
+> nextjs_tailwind_shadcn_ts@0.2.0 build
+> next build
+
+Γû▓ Next.js 16.1.3 (Turbopack)
+- Environments: .env
+
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 41s
+  Running TypeScript ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/157) ...
+  Generating static pages using 7 workers (39/157) 
+  Generating static pages using 7 workers (78/157) 
+  Generating static pages using 7 workers (117/157) 
+Γ£ô Generating static pages using 7 workers (157/157) in 4.5s
+  Finalizing page optimization ...
+
+Route (app)
+Γöî Γùï /
+Γö£ Γùï /_not-found
+Γö£ Γùï /403
+Γö£ Γùï /about
+Γö£ Γùï /access-denied
+Γö£ Γùï /account
+Γö£ Γùï /account-locked
+Γö£ Γùï /account-reactivation
+Γö£ Γùï /account/addresses
+Γö£ Γùï /account/orders
+Γö£ ╞Æ /account/orders/[id]
+Γö£ Γùï /account/payment-methods
+Γö£ Γùï /account/profile
+Γö£ Γùï /account/wishlist
+Γö£ Γùï /admin/ab-testing
+Γö£ Γùï /admin/algorithms
+Γö£ Γùï /admin/analytics/behavior
+Γö£ Γùï /admin/analytics/chat
+Γö£ Γùï /admin/analytics/customers
+Γö£ Γùï /admin/analytics/inventory
+Γö£ Γùï /admin/analytics/sales
+Γö£ Γùï /admin/analytics/support
+Γö£ Γùï /admin/backup
+Γö£ Γùï /admin/categories
+Γö£ Γùï /admin/chat
+Γö£ Γùï /admin/chatbot
+Γö£ Γùï /admin/dashboard
+Γö£ Γùï /admin/dynamic-pricing
+Γö£ Γùï /admin/forgot-password
+Γö£ Γùï /admin/fraud
+Γö£ Γùï /admin/home
+Γö£ Γùï /admin/inventory
+Γö£ Γùï /admin/login
+Γö£ Γùï /admin/mfa
+Γö£ Γùï /admin/orders
+Γö£ ╞Æ /admin/orders/[id]
+Γö£ Γùï /admin/payments
+Γö£ Γùï /admin/pricing
+Γö£ Γùï /admin/products
+Γö£ Γùï /admin/recommendations
+Γö£ Γùï /admin/reports
+Γö£ Γùï /admin/reset-password
+Γö£ Γùï /admin/roles
+Γö£ Γùï /admin/session-timeout
+Γö£ Γùï /admin/settings
+Γö£ Γùï /admin/shipments
+Γö£ Γùï /admin/system
+Γö£ Γùï /admin/tickets
+Γö£ ╞Æ /admin/tickets/[id]
+Γö£ Γùï /admin/unauthorized
+Γö£ Γùï /admin/users
+Γö£ Γùï /admin/vendors
+Γö£ Γùï /age-gate
+Γö£ ╞Æ /api
+Γö£ ╞Æ /api/admin/auth/forgot-password
+Γö£ ╞Æ /api/admin/auth/login
+Γö£ ╞Æ /api/admin/auth/mfa
+Γö£ ╞Æ /api/admin/auth/reset-password
+Γö£ ╞Æ /api/admin/categories
+Γö£ ╞Æ /api/admin/inventory
+Γö£ ╞Æ /api/admin/orders
+Γö£ ╞Æ /api/admin/payments
+Γö£ ╞Æ /api/admin/pricing
+Γö£ ╞Æ /api/admin/products
+Γö£ ╞Æ /api/admin/tickets
+Γö£ ╞Æ /api/admin/users
+Γö£ ╞Æ /api/age-gate
+Γö£ ╞Æ /api/auth/captcha
+Γö£ ╞Æ /api/auth/forgot-password
+Γö£ ╞Æ /api/auth/login
+Γö£ ╞Æ /api/auth/logout
+Γö£ ╞Æ /api/auth/mfa
+Γö£ ╞Æ /api/auth/oauth
+Γö£ ╞Æ /api/auth/register
+Γö£ ╞Æ /api/auth/reset-password
+Γö£ ╞Æ /api/auth/verify-email
+Γö£ ╞Æ /api/blog
+Γö£ ╞Æ /api/blog/[slug]
+Γö£ ╞Æ /api/brands
+Γö£ ╞Æ /api/brands/[slug]
+Γö£ ╞Æ /api/careers
+Γö£ ╞Æ /api/cart
+Γö£ ╞Æ /api/categories
+Γö£ ╞Æ /api/categories/[slug]
+Γö£ ╞Æ /api/checkout
+Γö£ ╞Æ /api/checkout/guest
+Γö£ ╞Æ /api/compare
+Γö£ ╞Æ /api/compatibility
+Γö£ ╞Æ /api/contact
+Γö£ ╞Æ /api/deals
+Γö£ ╞Æ /api/legal-consent
+Γö£ ╞Æ /api/locations
+Γö£ ╞Æ /api/newsletter
+Γö£ ╞Æ /api/orders
+Γö£ ╞Æ /api/orders/[id]
+Γö£ ╞Æ /api/orders/[id]/cancel
+Γö£ ╞Æ /api/orders/[id]/refund
+Γö£ ╞Æ /api/orders/[id]/track
+Γö£ ╞Æ /api/products
+Γö£ ╞Æ /api/products/[slug]
+Γö£ ╞Æ /api/products/[slug]/reviews
+Γö£ ╞Æ /api/promotions
+Γö£ ╞Æ /api/qa
+Γö£ ╞Æ /api/reviews
+Γö£ ╞Æ /api/reviews/[id]
+Γö£ ╞Æ /api/save-for-later
+Γö£ ╞Æ /api/search
+Γö£ ╞Æ /api/session
+Γö£ ╞Æ /api/support/tickets
+Γö£ ╞Æ /api/support/tickets/[id]/messages
+Γö£ ╞Æ /api/user/addresses
+Γö£ ╞Æ /api/user/addresses/[id]
+Γö£ ╞Æ /api/user/notifications
+Γö£ ╞Æ /api/user/payment-methods
+Γö£ ╞Æ /api/user/payment-methods/[id]
+Γö£ ╞Æ /api/user/profile
+Γö£ ╞Æ /api/wishlist
+Γö£ Γùï /best-sellers
+Γö£ Γùï /blog
+Γö£ ╞Æ /blog/[slug]
+Γö£ ╞Æ /brand/[slug]
+Γö£ Γùï /brands
+Γö£ Γùï /captcha
+Γö£ Γùï /careers
+Γö£ Γùï /cart
+Γö£ ╞Æ /category/[slug]
+Γö£ Γùï /checkout/address
+Γö£ Γùï /checkout/cod-confirmation
+Γö£ Γùï /checkout/failure
+Γö£ Γùï /checkout/payment
+Γö£ Γùï /checkout/processing
+Γö£ Γùï /checkout/review
+Γö£ Γùï /checkout/shipping
+Γö£ Γùï /checkout/success
+Γö£ Γùï /compare
+Γö£ Γùï /compatibility-checker
+Γö£ Γùï /contact
+Γö£ Γùï /cookie
+Γö£ Γùï /data-load-failure
+Γö£ Γùï /deals
+Γö£ Γùï /error/500
+Γö£ Γùï /forgot-password
+Γö£ Γùï /guest-checkout
+Γö£ Γùï /help-center
+Γö£ Γùï /legal-consent
+Γö£ Γùï /locations
+Γö£ Γùï /login
+Γö£ Γùï /maintenance
+Γö£ Γùï /mfa
+Γö£ Γùï /new-arrivals
+Γö£ Γùï /newsletter
+Γö£ Γùï /not-found
+Γö£ Γùï /oauth
+Γö£ Γùï /privacy
+Γö£ ╞Æ /product/[slug]
+Γö£ Γùï /promotions
+Γö£ Γùï /rate-limit
+Γö£ Γùï /register
+Γö£ Γùï /reset-password
+Γö£ Γùï /reset-password/success
+Γö£ Γùï /returns
+Γö£ Γùï /save-for-later
+Γö£ Γùï /search
+Γö£ Γùï /security
+Γö£ ╞Æ /seo/[...slug]
+Γö£ ╞Æ /seo/[slug]
+Γö£ Γùï /session-expired
+Γö£ Γùï /shipping
+Γö£ Γùï /sitemap
+Γö£ Γùï /support/chat
+Γö£ Γùï /support/chat-history
+Γö£ Γùï /support/tickets
+Γö£ ╞Æ /support/tickets/[id]
+Γö£ Γùï /support/tickets/new
+Γö£ Γùï /terms
+Γö£ Γùï /track-order
+Γö£ Γùï /user-agreement
+Γö£ Γùï /verify-email
+Γöö Γùï /warranty
+
+
+Γùï  (Static)   prerendered as static content
+╞Æ  (Dynamic)  server-rendered on demand
+
