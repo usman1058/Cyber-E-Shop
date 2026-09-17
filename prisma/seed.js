@@ -658,7 +658,7 @@ Seamless iOS integration, spatial audio, premium build.
 
 ### 🥉 Best Value: Soundcore Space Q45
 Great ANC, 50-hour battery, under $150.
-**Price: $149`
+**Price: $149**
 
 ### 🎮 Best for Gaming: SteelSeries Arctis Nova Pro Wireless
 Dual battery system, GameDAC, retractable mic.
@@ -986,8 +986,18 @@ At $1099, the M3 Air hits the perfect balance of performance, portability, and p
   // 17. ADDITIONAL WISHLIST ITEMS
   console.log('Adding more wishlist items...');
   for (let i = 0; i < Math.min(8, prodRecords.length); i++) {
-    await prisma.wishlistItem.create({
-      data: {
+    await prisma.wishlistItem.upsert({
+      where: {
+        userId_productId: {
+          userId: customer.id,
+          productId: prodRecords[i].id,
+        },
+      },
+      update: {
+        priceDrop: Math.random() > 0.5,
+        stockAlert: Math.random() > 0.7,
+      },
+      create: {
         userId: customer.id,
         productId: prodRecords[i].id,
         productName: prodRecords[i].name,
