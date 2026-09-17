@@ -8,6 +8,7 @@ import { CategoryCard } from '@/components/shop/category-card'
 import { DealCard } from '@/components/shop/deal-card'
 import { BlogCard } from '@/components/shop/blog-card'
 import { PageLayout } from '@/components/layout/page-layout'
+import { DealSlider } from '@/components/shop/deal-slider'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
@@ -43,7 +44,14 @@ export default function HomePage() {
 
         setCategories(catData.categories || [])
         setFeaturedProducts(prodData.products || [])
-        setFlashDeals(dealData.products || []) // Using products on sale as flash deals for now
+        setFlashDeals((dealData.products || []).map((p: any) => ({
+          ...p,
+          image: p.images?.[0] || '/images/products/placeholder.jpg',
+          originalPrice: p.comparePrice || p.price * 1.2,
+          discountedPrice: p.price,
+          discount: p.comparePrice ? Math.round(((p.comparePrice - p.price) / p.comparePrice) * 100) : 0,
+          flash: true,
+        })))
         setBlogPosts(blogData.posts || [])
       } catch (error) {
         console.error('Error fetching home data:', error)
@@ -100,6 +108,13 @@ export default function HomePage() {
         <div className="absolute right-0 top-0 h-full w-1/2 opacity-10 pointer-events-none">
           <div className="absolute right-20 top-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
           <div className="absolute right-40 bottom-20 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
+        </div>
+      </section>
+
+      {/* Flash Deals Slider in Hero Area */}
+      <section className="py-8 md:py-12 bg-background/50 border-b">
+        <div className="container mx-auto px-4">
+          <DealSlider deals={flashDeals} />
         </div>
       </section>
 
