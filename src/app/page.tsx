@@ -7,7 +7,7 @@ import { ProductCard } from '@/components/shop/product-card'
 import { CategoryCard } from '@/components/shop/category-card'
 import { DealCard } from '@/components/shop/deal-card'
 import { BlogCard } from '@/components/shop/blog-card'
-import { PageLayout } from '@/components/layout/page-layout'
+import { PageLayout, Section, Container, Grid, Flex } from '@/components/layout/page-layout'
 import { DealSlider } from '@/components/shop/deal-slider'
 import { HeroDealSlider } from '@/components/shop/hero-deal-slider'
 import { Card, CardContent } from '@/components/ui/card'
@@ -67,20 +67,82 @@ export default function HomePage() {
   const handleNewsletterSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (email) {
-      // Subscribe to newsletter
       alert(`Thank you for subscribing with ${email}!`)
       setEmail('')
     }
   }
 
+  const TrustIndicator = ({ icon: Icon, title, description }: { 
+    icon: React.ComponentType<{ className?: string }>
+    title: string
+    description: string
+  }) => (
+    <div className="flex flex-col items-center text-center">
+      <Icon className="h-10 w-10 text-primary mb-2" />
+      <h3 className="font-semibold">{title}</h3>
+      <p className="text-sm text-muted-foreground">{description}</p>
+    </div>
+  )
+
+  const SectionHeader = ({ 
+    title, 
+    description, 
+    badge, 
+    action 
+  }: { 
+    title: string
+    description?: string
+    badge?: React.ReactNode
+    action?: React.ReactNode
+  }) => (
+    <Flex className="mb-8 md:mb-12" justify="between" align="start" direction="col" gap="tight" wrap>
+      <div>
+        {badge && <div className="mb-2">{badge}</div>}
+        <h2 className="text-2xl md:text-3xl font-bold">{title}</h2>
+        {description && <p className="text-muted-foreground mt-1">{description}</p>}
+      </div>
+      {action && <div className="mt-4 md:mt-0">{action}</div>}
+    </Flex>
+  )
+
+  const ProductGrid = ({ 
+    products, 
+    emptyMessage 
+  }: { 
+    products: any[]
+    emptyMessage: string
+  }) => (
+    <Grid cols={4} gap="md">
+      {loading ? (
+        Array(4).fill(0).map((_, i) => (
+          <div key={i} className="aspect-square bg-muted animate-pulse rounded-xl" />
+        ))
+      ) : products.length > 0 ? (
+        products.map((product) => (
+          <ProductCard key={product.id} {...product} />
+        ))
+      ) : (
+        <div className="col-span-full text-center py-12 text-muted-foreground">
+          {emptyMessage}
+        </div>
+      )}
+    </Grid>
+  )
+
   return (
-    <PageLayout>
+    <PageLayout sectioned>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-primary/5">
-        <div className="container mx-auto px-4 py-16 md:py-24">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+      <Section size="lg" className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-primary/5">
+        <Container>
+          <Flex 
+            direction={{ base: 'col', lg: 'row' }} 
+            align="start" 
+            justify="between" 
+            gap="relaxed" 
+            className="items-start"
+          >
             {/* Left: Hero Content */}
-            <div className="max-w-3xl">
+            <div className="max-w-3xl w-full lg:max-w-none">
               <Badge className="mb-4" variant="secondary">
                 <Sparkles className="mr-1 h-3 w-3" />
                 New Arrivals Available
@@ -92,7 +154,7 @@ export default function HomePage() {
                 Shop the latest electronics, gadgets, and tech accessories at unbeatable prices. 
                 Free shipping on orders over $50.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <Flex direction={{ base: 'col', sm: 'row' }} gap="tight" wrap>
                 <Link href="/category/electronics">
                   <Button size="lg" className="w-full sm:w-auto">
                     Shop Now <ArrowRight className="ml-2 h-4 w-4" />
@@ -103,158 +165,117 @@ export default function HomePage() {
                     View Deals
                   </Button>
                 </Link>
-              </div>
+              </Flex>
             </div>
 
             {/* Right: Compact Flash Deals Slider */}
-            <div className="hidden lg:block relative">
+            <div className="hidden lg:block relative w-full max-w-md">
               <div className="sticky top-24">
                 <HeroDealSlider deals={flashDeals} />
               </div>
             </div>
+          </Flex>
+
+          {/* Mobile: Show slider below content */}
+          <div className="lg:hidden mt-10">
+            <HeroDealSlider deals={flashDeals} />
           </div>
-        </div>
-        
-        {/* Mobile: Show slider below content */}
-        <div className="lg:hidden mt-10 px-4">
-          <HeroDealSlider deals={flashDeals} />
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       {/* Trust Indicators */}
-      <section className="border-b bg-muted/50">
-        <div className="container mx-auto px-4 py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="flex flex-col items-center text-center">
-              <Truck className="h-10 w-10 text-primary mb-2" />
-              <h3 className="font-semibold">Free Shipping</h3>
-              <p className="text-sm text-muted-foreground">On orders over $50</p>
-            </div>
-            <div className="flex flex-col items-center text-center">
-              <Shield className="h-10 w-10 text-primary mb-2" />
-              <h3 className="font-semibold">Secure Checkout</h3>
-              <p className="text-sm text-muted-foreground">SSL encrypted</p>
-            </div>
-            <div className="flex flex-col items-center text-center">
-              <RotateCcw className="h-10 w-10 text-primary mb-2" />
-              <h3 className="font-semibold">Easy Returns</h3>
-              <p className="text-sm text-muted-foreground">30-day policy</p>
-            </div>
-            <div className="flex flex-col items-center text-center">
-              <Clock className="h-10 w-10 text-primary mb-2" />
-              <h3 className="font-semibold">24/7 Support</h3>
-              <p className="text-sm text-muted-foreground">Always here to help</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Section size="sm" className="border-b bg-muted/50">
+        <Container>
+          <Grid cols={4} gap="md">
+            <TrustIndicator icon={Truck} title="Free Shipping" description="On orders over $50" />
+            <TrustIndicator icon={Shield} title="Secure Checkout" description="SSL encrypted" />
+            <TrustIndicator icon={RotateCcw} title="Easy Returns" description="30-day policy" />
+            <TrustIndicator icon={Clock} title="24/7 Support" description="Always here to help" />
+          </Grid>
+        </Container>
+      </Section>
 
       {/* Categories Section */}
-      <section className="py-12 md:py-16">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold">Shop by Category</h2>
-              <p className="text-muted-foreground mt-1">Find exactly what you're looking for</p>
-            </div>
-            <Link href="/categories">
-              <Button variant="ghost">
-                View All <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <Section size="md">
+        <Container>
+          <SectionHeader
+            title="Shop by Category"
+            description="Find exactly what you're looking for"
+            action={
+              <Link href="/categories">
+                <Button variant="ghost">View All <ArrowRight className="ml-2 h-4 w-4" /></Button>
+              </Link>
+            }
+          />
+          <Grid cols={6} gap="md">
             {loading ? (
               Array(6).fill(0).map((_, i) => (
-                <div key={i} className="aspect-square bg-muted animate-pulse rounded-lg" />
+                <div key={i} className="aspect-square bg-muted animate-pulse rounded-xl" />
               ))
             ) : categories.length > 0 ? (
               categories.map((category) => (
                 <CategoryCard key={category.id} {...category} />
               ))
             ) : (
-              <div className="col-span-full text-center py-8 text-muted-foreground">
+              <div className="col-span-full text-center py-12 text-muted-foreground">
                 No categories found
               </div>
             )}
-          </div>
-        </div>
-      </section>
+          </Grid>
+        </Container>
+      </Section>
 
       {/* Flash Deals Section */}
-      <section className="py-12 md:py-16 bg-gradient-to-b from-primary/5 to-background">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <Badge className="mb-2" variant="destructive">
-                Limited Time
-              </Badge>
-              <h2 className="text-2xl md:text-3xl font-bold">Flash Deals</h2>
-              <p className="text-muted-foreground mt-1">Hurry! Offers end soon</p>
-            </div>
-            <Link href="/deals">
-              <Button variant="ghost">
-                View All Deals <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <Section size="md" className="bg-gradient-to-b from-primary/5 to-background">
+        <Container>
+          <SectionHeader
+            badge={<Badge variant="destructive">Limited Time</Badge>}
+            title="Flash Deals"
+            description="Hurry! Offers end soon"
+            action={
+              <Link href="/deals">
+                <Button variant="ghost">View All Deals <ArrowRight className="ml-2 h-4 w-4" /></Button>
+              </Link>
+            }
+          />
+          <Grid cols={4} gap="md">
             {loading ? (
               Array(4).fill(0).map((_, i) => (
-                <div key={i} className="aspect-square bg-muted animate-pulse rounded-lg" />
+                <div key={i} className="aspect-square bg-muted animate-pulse rounded-xl" />
               ))
             ) : flashDeals.length > 0 ? (
               flashDeals.map((deal) => (
                 <DealCard key={deal.id} {...deal} />
               ))
             ) : (
-              <div className="col-span-full text-center py-8 text-muted-foreground">
+              <div className="col-span-full text-center py-12 text-muted-foreground">
                 No flash deals available right now
               </div>
             )}
-          </div>
-        </div>
-      </section>
+          </Grid>
+        </Container>
+      </Section>
 
       {/* Featured Products Section */}
-      <section className="py-12 md:py-16">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold">Featured Products</h2>
-              <p className="text-muted-foreground mt-1">Handpicked by our team</p>
-            </div>
-            <Link href="/best-sellers">
-              <Button variant="ghost">
-                View All <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {loading ? (
-              Array(4).fill(0).map((_, i) => (
-                <div key={i} className="aspect-square bg-muted animate-pulse rounded-lg" />
-              ))
-            ) : featuredProducts.length > 0 ? (
-              featuredProducts.map((product) => (
-                <ProductCard key={product.id} {...product} />
-              ))
-            ) : (
-              <div className="col-span-full text-center py-8 text-muted-foreground">
-                No featured products found
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
+      <Section size="md">
+        <Container>
+          <SectionHeader
+            title="Featured Products"
+            description="Handpicked by our team"
+            action={
+              <Link href="/best-sellers">
+                <Button variant="ghost">View All <ArrowRight className="ml-2 h-4 w-4" /></Button>
+              </Link>
+            }
+          />
+          <ProductGrid products={featuredProducts} emptyMessage="No featured products found" />
+        </Container>
+      </Section>
 
       {/* New Arrivals & Best Sellers */}
-      <section className="py-12 md:py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-8 mb-8">
+      <Section size="md" className="bg-muted/30">
+        <Container>
+          <Grid cols={2} gap="relaxed" className="mb-8 md:mb-12">
             <div>
               <Badge className="mb-2">Just In</Badge>
               <h2 className="text-2xl font-bold mb-2">New Arrivals</h2>
@@ -262,9 +283,7 @@ export default function HomePage() {
                 Check out the latest products we've added to our store
               </p>
               <Link href="/new-arrivals">
-                <Button>
-                  Shop New Arrivals <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+                <Button>Shop New Arrivals <ArrowRight className="ml-2 h-4 w-4" /></Button>
               </Link>
             </div>
             <div>
@@ -274,52 +293,47 @@ export default function HomePage() {
                 Our most popular products based on sales and reviews
               </p>
               <Link href="/best-sellers">
-                <Button variant="outline">
-                  Shop Best Sellers <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+                <Button variant="outline">Shop Best Sellers <ArrowRight className="ml-2 h-4 w-4" /></Button>
               </Link>
             </div>
-          </div>
-        </div>
-      </section>
+          </Grid>
+        </Container>
+      </Section>
 
       {/* Blog Section */}
-      <section className="py-12 md:py-16">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold">Latest from Our Blog</h2>
-              <p className="text-muted-foreground mt-1">Tech tips, reviews, and news</p>
-            </div>
-            <Link href="/blog">
-              <Button variant="ghost">
-                Read More <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
+      <Section size="md">
+        <Container>
+          <SectionHeader
+            title="Latest from Our Blog"
+            description="Tech tips, reviews, and news"
+            action={
+              <Link href="/blog">
+                <Button variant="ghost">Read More <ArrowRight className="ml-2 h-4 w-4" /></Button>
+              </Link>
+            }
+          />
+          <Grid cols={3} gap="md">
             {loading ? (
               Array(3).fill(0).map((_, i) => (
-                <div key={i} className="aspect-[4/3] bg-muted animate-pulse rounded-lg" />
+                <div key={i} className="aspect-[4/3] bg-muted animate-pulse rounded-xl" />
               ))
             ) : blogPosts.length > 0 ? (
               blogPosts.map((post) => (
                 <BlogCard key={post.id} {...post} />
               ))
             ) : (
-              <div className="col-span-full text-center py-8 text-muted-foreground">
+              <div className="col-span-full text-center py-12 text-muted-foreground">
                 No blog posts found
               </div>
             )}
-          </div>
-        </div>
-      </section>
+          </Grid>
+        </Container>
+      </Section>
 
       {/* Newsletter Section */}
-      <section className="py-12 md:py-16 bg-gradient-to-br from-primary to-primary/80 text-primary-foreground">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto text-center">
+      <Section size="md" className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground">
+        <Container size="md">
+          <div className="text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Subscribe & Save 10%
             </h2>
@@ -341,71 +355,47 @@ export default function HomePage() {
             </form>
             <p className="text-sm mt-4 opacity-75">
               By subscribing, you agree to our{' '}
-              <Link href="/privacy" className="underline hover:text-white">
-                Privacy Policy
-              </Link>
+              <Link href="/privacy" className="underline hover:text-white">Privacy Policy</Link>
               {' '}and{' '}
-              <Link href="/terms" className="underline hover:text-white">
-                Terms of Service
-              </Link>
+              <Link href="/terms" className="underline hover:text-white">Terms of Service</Link>
             </p>
           </div>
-        </div>
-      </section>
+        </Container>
+      </Section>
 
       {/* Testimonials / Reviews */}
-      {/* 
-        NOTE: These are currently hardcoded because they are general marketing text. 
-        In a full implementation, these would also come from a 'testimonials' API.
-      */}
-      <section className="py-12 md:py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
+      <Section size="md">
+        <Container>
+          <div className="text-center mb-8 md:mb-12">
             <h2 className="text-2xl md:text-3xl font-bold">What Our Customers Say</h2>
             <p className="text-muted-foreground mt-1">Trusted by thousands of tech enthusiasts</p>
           </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
+          <Grid cols={3} gap="md">
             {[
-              {
-                name: 'John D.',
-                rating: 5,
-                review: 'Excellent service and fast shipping! The product quality exceeded my expectations.',
-                product: 'Wireless Headphones',
-              },
-              {
-                name: 'Sarah M.',
-                rating: 5,
-                review: 'Best online tech store! Great prices and customer support is always helpful.',
-                product: 'Gaming Laptop',
-              },
-              {
-                name: 'Mike R.',
-                rating: 5,
-                review: 'I\'ve been shopping here for years. Never disappointed with my purchases.',
-                product: 'Smart TV',
-              },
+              { name: 'John D.', rating: 5, review: 'Excellent service and fast shipping! The product quality exceeded my expectations.', product: 'Wireless Headphones' },
+              { name: 'Sarah M.', rating: 5, review: 'Best online tech store! Great prices and customer support is always helpful.', product: 'Gaming Laptop' },
+              { name: 'Mike R.', rating: 5, review: 'I\'ve been shopping here for years. Never disappointed with my purchases.', product: 'Smart TV' },
             ].map((testimonial, index) => (
-              <Card key={index}>
+              <Card key={index} className="h-full">
                 <CardContent className="p-6">
-                  <div className="flex mb-3">
+                  <Flex gap="tight" className="mb-3">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                     ))}
-                  </div>
+                  </Flex>
                   <p className="text-muted-foreground mb-4">"{testimonial.review}"</p>
-                  <div className="flex items-center justify-between">
+                  <Flex justify="between">
                     <div>
                       <p className="font-medium">{testimonial.name}</p>
                       <p className="text-sm text-muted-foreground">{testimonial.product}</p>
                     </div>
-                  </div>
+                  </Flex>
                 </CardContent>
               </Card>
             ))}
-          </div>
-        </div>
-      </section>
+          </Grid>
+        </Container>
+      </Section>
     </PageLayout>
   )
 }
