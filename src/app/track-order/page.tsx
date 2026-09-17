@@ -22,7 +22,35 @@ export default function OrderTrackingPage() {
   const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
   const [loading, setLoading] = useState(false)
-  const [trackingResult, setTrackingResult] = useState<any>(null)
+
+  interface TrackingEvent {
+    icon: React.ReactNode
+    status: string
+    description: string
+    date: string
+    time: string
+  }
+
+  interface TrackingResult {
+    orderId: string
+    trackingNumber: string
+    carrier: string
+    status: string
+    estimatedDelivery: string
+    actualDelivery?: string
+    shippingAddress: {
+      fullName: string
+      address: string
+      city: string
+      state: string
+      postalCode: string
+      country: string
+      phone: string
+    }
+    timeline: TrackingEvent[]
+  }
+
+  const [trackingResult, setTrackingResult] = useState<TrackingResult | null>(null)
 
   const handleSearch = async () => {
     if (!searchQuery.trim()) {
@@ -39,6 +67,7 @@ export default function OrderTrackingPage() {
 
       if (data.success && data.order) {
         const order = data.order
+        const address = order.address || {}
         setTrackingResult({
           orderId: order.orderNumber,
           trackingNumber: order.trackingNumber || 'Pending',
@@ -47,8 +76,13 @@ export default function OrderTrackingPage() {
           estimatedDelivery: order.estimatedDelivery || new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
           actualDelivery: order.actualDelivery,
           shippingAddress: {
-            fullName: order.address?.fullName || order.guestName || 'Customer',
-            address: `${order.address?.address}, ${order.address?.city}, ${order.address?.state} ${order.address?.postalCode}`,
+            fullName: address.fullName || order.guestName || 'Customer',
+            address: address.address || '',
+            city: address.city || '',
+            state: address.state || '',
+            postalCode: address.postalCode || '',
+            country: address.country || 'USA',
+            phone: address.phone || order.guestPhone || '',
           },
           timeline: [
             {

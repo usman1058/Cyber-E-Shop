@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
+import { calculateShipping, calculateTax, calculateTotal } from '@/lib/constants'
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-super-secret-jwt-key-change-this-in-production'
 
@@ -121,9 +122,9 @@ export async function POST(request: NextRequest) {
 
     // Calculate totals
     const subtotal = cart.items.reduce((sum: number, item: any) => sum + item.totalPrice, 0)
-    const shipping = subtotal > 50 ? 0 : 5.99
-    const tax = subtotal * 0.08
-    const total = subtotal + shipping + tax
+    const shipping = calculateShipping(subtotal)
+    const tax = calculateTax(subtotal)
+    const total = calculateTotal(subtotal, shipping)
 
     // Generate order number
     const orderNumber = `ORD-${Date.now().toString().slice(-10)}`

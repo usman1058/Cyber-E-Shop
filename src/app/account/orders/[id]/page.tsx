@@ -26,7 +26,56 @@ export default function OrderDetailPage() {
   const router = useRouter()
   const orderId = params.id as string
 
-  const [order, setOrder] = useState<any>(null)
+  interface OrderItem {
+    id: string
+    name: string
+    image?: string
+    price: number
+    quantity: number
+    status: string
+  }
+
+  interface TrackingHistory {
+    date: string
+    status: string
+    description: string
+  }
+
+  interface Tracking {
+    carrier: string
+    trackingNumber: string
+    status: string
+    history: TrackingHistory[]
+  }
+
+  interface Order {
+    id: string
+    date: string
+    status: string
+    total: number
+    subtotal: number
+    shipping: number
+    tax: number
+    items: OrderItem[]
+    shippingAddress: {
+      fullName: string
+      address: string
+      city: string
+      state: string
+      postalCode: string
+      country: string
+      phone: string
+    }
+    paymentMethod: string
+    paymentStatus: string
+    trackingNumber: string
+    carrier: string
+    estimatedDelivery?: string
+    actualDelivery?: string
+    tracking?: Tracking
+  }
+
+  const [order, setOrder] = useState<Order | null>(null)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -40,6 +89,9 @@ export default function OrderDetailPage() {
       shipping: 0,
       tax: 100.00,
       paymentMethod: 'COD',
+      paymentStatus: 'paid',
+      trackingNumber: '123456789012',
+      carrier: 'FedEx',
       estimatedDelivery: '2024-01-22',
       actualDelivery: '2024-01-21',
       items: [
@@ -75,7 +127,8 @@ export default function OrderDetailPage() {
     })
   }, [orderId])
 
-  const getStatusBadge = (status: string) => {
+  const getStatusBadge = (status?: string) => {
+    if (!status) return <Badge variant="secondary">Unknown</Badge>
     switch (status) {
       case 'Delivered':
         return <Badge className="bg-green-100 text-green-800">Delivered</Badge>
@@ -131,7 +184,7 @@ export default function OrderDetailPage() {
                     {order?.items.map((item) => (
                       <div key={item.id} className="p-6 flex gap-4">
                         <img
-                          src={item.image}
+                          src={item.image || '/images/products/placeholder.jpg'}
                           alt={item.name}
                           className="w-20 h-20 object-cover rounded"
                         />

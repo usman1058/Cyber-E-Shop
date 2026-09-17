@@ -148,7 +148,7 @@ export async function POST(request: NextRequest) {
     // 6. Calculate discount amount
 
     // Mock promotion validation
-    const validPromoCodes = {
+    const validPromoCodes: Record<string, { discount: number; type: string; maxAmount?: number }> = {
       'FLASH40': { discount: 0.40, type: 'percentage', maxAmount: 500 },
       'FREESHIP': { discount: 0, type: 'shipping' },
       'WELCOME20': { discount: 0.20, type: 'percentage', maxAmount: 100 },

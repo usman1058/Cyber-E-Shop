@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react'
 
-type Currency = 'PKR' | 'USD' | 'EUR' | 'GBP'
+type Currency = 'USD' | 'PKR' | 'EUR' | 'GBP'
 
 interface CurrencyContextType {
   currency: Currency
@@ -15,27 +15,34 @@ interface CurrencyContextType {
 const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined)
 
 const DEFAULT_RATES: Record<Currency, number> = {
-  PKR: 1,
-  USD: 1 / 280, // Approximate fallback
-  EUR: 1 / 300,
-  GBP: 1 / 350,
+  USD: 1,
+  PKR: 280,
+  EUR: 0.92,
+  GBP: 0.79,
+}
+
+const LOCALE_MAP: Record<Currency, string> = {
+  USD: 'en-US',
+  PKR: 'en-PK',
+  EUR: 'de-DE',
+  GBP: 'en-GB',
 }
 
 export const CurrencyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [currency, setCurrencyState] = useState<Currency>('PKR')
+  const [currency, setCurrencyState] = useState<Currency>('USD')
   const [exchangeRates, setExchangeRates] = useState<Record<Currency, number>>(DEFAULT_RATES)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const saved = localStorage.getItem('eshop_currency') as Currency
-    if (saved) setCurrencyState(saved)
+    if (saved && saved in DEFAULT_RATES) setCurrencyState(saved)
 
     const fetchRates = async () => {
       try {
         const res = await fetch('/api/currency')
         const data = await res.json()
         if (data.rates) {
-          setExchangeRates(data.rates)
+          setExchangeRates(prev => ({ ...prev, ...data.rates }))
         }
       } catch (err) {
         console.error('Failed to fetch currency rates:', err)
@@ -53,16 +60,10 @@ export const CurrencyProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }
 
   const formatPrice = useCallback((amount: number, fromCurrency: Currency = 'USD') => {
-    // Current assumption: Base pricing in DB is USD for stability, converted to PKR/others for display
-    // But user wants PKR default. I'll assume input amount is the BASE value (USD) if not specified.
-    // If user says "default in PKR", I should consider if prices in DB are USD or PKR.
-    // Given the previous code used $, I'll assume DB is USD and we convert.
+    const baseAmount = amount / exchangeRates[fromCurrency]
+    const targetAmount = baseAmount * exchangeRates[currency]
     
-    // Convert from PKR (base) if we assume PKR as 1
-    const pkrAmount = amount / exchangeRates[fromCurrency]
-    const targetAmount = pkrAmount * exchangeRates[currency]
-    
-    return new Intl.NumberFormat('en-PK', {
+    return new Intl.NumberFormat(LOCALE_MAP[currency], {
       style: 'currency',
       currency: currency,
       minimumFractionDigits: 2,

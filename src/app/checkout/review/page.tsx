@@ -31,7 +31,51 @@ export default function CheckoutReviewPage() {
   const { formatPrice } = useCurrency()
   const { navigateWithLoader, LoaderComponent } = useNavigationLoader()
   const [placingOrder, setPlacingOrder] = useState(false)
-  const [orderDetails, setOrderDetails] = useState<any>(null)
+
+  interface CartItem {
+    id: string
+    name: string
+    slug: string
+    price: number
+    image: string
+    quantity: number
+    stock: number
+    category?: string
+    brand?: string
+  }
+
+  interface OrderDetails {
+    items: CartItem[]
+    shippingAddress: {
+      fullName: string
+      phone: string
+      address: string
+      apartment?: string
+      city: string
+      state: string
+      postalCode: string
+      country: string
+    }
+    shippingMethod: {
+      id: string
+      name: string
+      eta: string
+      cost: number
+    }
+    paymentMethod: {
+      id: string
+      name: string
+    }
+    summary: {
+      subtotal: number
+      shipping: number
+      tax: number
+      total: number
+      savings: number
+    }
+  }
+
+  const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

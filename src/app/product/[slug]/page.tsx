@@ -173,7 +173,7 @@ export default function ProductDetailPage() {
           productId: product.id,
           quantity: quantity,
           userId: session?.user?.id,
-          sessionId: 'guest-session', // In a real app, this would be a persistent cookie-based session
+          sessionId: session?.guestId,
         }),
       })
 

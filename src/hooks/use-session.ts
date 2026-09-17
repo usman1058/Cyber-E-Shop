@@ -16,6 +16,7 @@ interface Session {
   user: User | null
   token: string | null
   expiresAt: Date | null
+  guestId: string | null
 }
 
 interface UseSessionReturn {
@@ -26,6 +27,21 @@ interface UseSessionReturn {
   refetch: () => Promise<void>
 }
 
+function getCookie(name: string): string | null {
+  if (typeof document === 'undefined') return null
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop()?.split(';').shift() || null
+  return null
+}
+
+function setCookie(name: string, value: string, days: number = 365) {
+  if (typeof document === 'undefined') return
+  const expires = new Date()
+  expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000)
+  document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;SameSite=Lax`
+}
+
 export function useSession(options?: { required?: boolean; redirectTo?: string }): UseSessionReturn {
   const router = useRouter()
   const [session, setSession] = useState<Session | null>(null)
@@ -33,12 +49,12 @@ export function useSession(options?: { required?: boolean; redirectTo?: string }
   const [error, setError] = useState<string | null>(null)
   const [guestId, setGuestId] = useState<string | null>(null)
 
-  // Manage Guest ID
+  // Manage Guest ID - use cookie for persistence across refreshes
   useEffect(() => {
-    let id = localStorage.getItem('eshop_guest_id')
+    let id = getCookie('eshop_guest_id')
     if (!id) {
       id = `guest_${Math.random().toString(36).substring(2, 11)}_${Date.now()}`
-      localStorage.setItem('eshop_guest_id', id)
+      setCookie('eshop_guest_id', id)
     }
     setGuestId(id)
   }, [])
@@ -60,6 +76,7 @@ export function useSession(options?: { required?: boolean; redirectTo?: string }
           user: data.user,
           token: data.token,
           expiresAt: data.expiresAt ? new Date(data.expiresAt) : null,
+          guestId,
         })
       } else {
         setSession({
@@ -67,6 +84,7 @@ export function useSession(options?: { required?: boolean; redirectTo?: string }
           user: null,
           token: null,
           expiresAt: null,
+          guestId,
         })
 
         // Redirect if session is required
@@ -81,6 +99,7 @@ export function useSession(options?: { required?: boolean; redirectTo?: string }
         user: null,
         token: null,
         expiresAt: null,
+        guestId,
       })
 
       // Redirect on error if session is required

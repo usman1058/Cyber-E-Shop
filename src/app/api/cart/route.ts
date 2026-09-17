@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
+import { calculateShipping, calculateTax, calculateTotal } from '@/lib/constants'
+import { cartAddSchema, cartUpdateSchema, cartDeleteSchema } from '@/lib/validations'
 
 // Get cart items
 export async function GET(request: NextRequest) {
@@ -43,9 +45,9 @@ export async function GET(request: NextRequest) {
     // Calculate totals
     const subtotal = cart.items.reduce((sum, item) => sum + item.totalPrice, 0)
     const savings = 0 // Can be expanded later
-    const shipping = subtotal > 50 ? 0 : 5.99
-    const tax = subtotal * 0.08
-    const total = subtotal + shipping + tax
+    const shipping = calculateShipping(subtotal)
+    const tax = calculateTax(subtotal)
+    const total = calculateTotal(subtotal, shipping)
 
     return NextResponse.json({
       success: true,
@@ -83,21 +85,17 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { userId, sessionId, productId, quantity = 1 } = body
-
-    if (!productId) {
+    
+    // Validate request body
+    const validation = cartAddSchema.safeParse(body)
+    if (!validation.success) {
       return NextResponse.json(
-        { error: 'Product ID is required' },
+        { error: 'Invalid request', details: validation.error.flatten().fieldErrors },
         { status: 400 }
       )
     }
-
-    if (quantity < 1 || quantity > 10) {
-      return NextResponse.json(
-        { error: 'Quantity must be between 1 and 10' },
-        { status: 400 }
-      )
-    }
+    
+    const { userId, sessionId, productId, quantity } = validation.data
 
     // Get product details
     const product = await db.product.findUnique({ where: { id: productId } })
@@ -115,68 +113,67 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    if (!userId && !sessionId) {
-      return NextResponse.json(
-        { error: 'User ID or Session ID is required' },
-        { status: 400 }
-      )
-    }
-
-    // Find or create cart
-    const cart = await db.cart.upsert({
-      where: userId ? { userId: userId as string } : { sessionId: sessionId as string },
-      update: { updatedAt: new Date() },
-      create: {
-        userId: userId || null,
-        sessionId: (sessionId || `session_${Date.now()}`) as string,
-        updatedAt: new Date(),
-      },
-    })
-
-    // Check if item already in cart
-    const existingItem = await db.cartItem.findFirst({
-      where: {
-        cartId: cart.id,
-        productId,
-      },
-    })
-
-    if (existingItem) {
-      // Update quantity
-      await db.cartItem.update({
-        where: { id: existingItem.id },
-        data: {
-          quantity: existingItem.quantity + quantity,
-          totalPrice: (existingItem.quantity + quantity) * product.price,
+    // Find or create cart and add/update item in a transaction
+    const result = await db.$transaction(async (tx) => {
+      const cart = await tx.cart.upsert({
+        where: userId ? { userId: userId as string } : { sessionId: sessionId as string },
+        update: { updatedAt: new Date() },
+        create: {
+          userId: userId || null,
+          sessionId: (sessionId || `session_${Date.now()}`) as string,
           updatedAt: new Date(),
         },
       })
-    } else {
-      // Add new item
-      await db.cartItem.create({
-        data: {
+
+      const existingItem = await tx.cartItem.findFirst({
+        where: {
           cartId: cart.id,
           productId,
-          productName: product.name,
-          productSlug: product.slug,
-          productImage: product.images,
-          quantity,
-          unitPrice: product.price,
-          totalPrice: quantity * product.price,
         },
       })
-    }
 
-    // Update cart updatedAt
-    await db.cart.update({
-      where: { id: cart.id },
-      data: { updatedAt: new Date() },
+      let cartItemId: string
+      if (existingItem) {
+        // Update quantity
+        await tx.cartItem.update({
+          where: { id: existingItem.id },
+          data: {
+            quantity: existingItem.quantity + quantity,
+            totalPrice: (existingItem.quantity + quantity) * product.price,
+            updatedAt: new Date(),
+          },
+        })
+        cartItemId = existingItem.id
+      } else {
+        // Add new item
+        const newItem = await tx.cartItem.create({
+          data: {
+            cartId: cart.id,
+            productId,
+            productName: product.name,
+            productSlug: product.slug,
+            productImage: product.images,
+            quantity,
+            unitPrice: product.price,
+            totalPrice: quantity * product.price,
+          },
+        })
+        cartItemId = newItem.id
+      }
+
+      // Update cart updatedAt
+      await tx.cart.update({
+        where: { id: cart.id },
+        data: { updatedAt: new Date() },
+      })
+
+      return { cartId: cart.id, cartItemId }
     })
 
     return NextResponse.json({
       success: true,
       message: 'Item added to cart',
-      cartItemId: `ci-${Date.now()}`,
+      cartItemId: result.cartItemId,
     }, { status: 201 })
 
   } catch (error: any) {
@@ -192,21 +189,16 @@ export async function POST(request: NextRequest) {
 export async function PUT(request: NextRequest) {
   try {
     const body = await request.json()
-    const { userId, sessionId, cartItemId, quantity } = body
-
-    if (!cartItemId || quantity === undefined) {
+    
+    const validation = cartUpdateSchema.safeParse(body)
+    if (!validation.success) {
       return NextResponse.json(
-        { error: 'Cart item ID and quantity are required' },
+        { error: 'Invalid request', details: validation.error.flatten().fieldErrors },
         { status: 400 }
       )
     }
-
-    if (quantity < 1 || quantity > 10) {
-      return NextResponse.json(
-        { error: 'Quantity must be between 1 and 10' },
-        { status: 400 }
-      )
-    }
+    
+    const { cartItemId, quantity } = validation.data
 
     // Verify cart item exists
     const cartItem = await db.cartItem.findUnique({
@@ -265,16 +257,17 @@ export async function PUT(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
-    const cartItemId = searchParams.get('cartItemId')
-    const userId = searchParams.get('userId')
-    const sessionId = searchParams.get('sessionId')
-
-    if (!cartItemId) {
+    const params = Object.fromEntries(searchParams.entries())
+    
+    const validation = cartDeleteSchema.safeParse(params)
+    if (!validation.success) {
       return NextResponse.json(
-        { error: 'Cart item ID is required' },
+        { error: 'Invalid request', details: validation.error.flatten().fieldErrors },
         { status: 400 }
       )
     }
+    
+    const { cartItemId } = validation.data
 
     // Verify cart item exists
     const cartItem = await db.cartItem.findUnique({
