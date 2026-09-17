@@ -18,6 +18,7 @@ interface DealCardProps {
   endDate?: Date
   type?: string
   flash?: boolean
+  className?: string
 }
 
 export function DealCard({
@@ -31,6 +32,7 @@ export function DealCard({
   endDate,
   type = 'promo',
   flash = false,
+  className,
 }: DealCardProps) {
   const [timeLeft, setTimeLeft] = useState<{ hours: number, minutes: number, seconds: number } | null>(null)
 
@@ -61,7 +63,7 @@ export function DealCard({
   }, [endDate])
 
   return (
-    <Card className="group overflow-hidden transition-all hover:shadow-lg border-primary/20">
+    <Card className={`group overflow-hidden transition-all hover:shadow-lg border-primary/20 ${className || ''}`}>
       <CardContent className="p-0">
         <div className="relative">
           {/* Image */}

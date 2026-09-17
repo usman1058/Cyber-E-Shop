@@ -9,6 +9,7 @@ import { DealCard } from '@/components/shop/deal-card'
 import { BlogCard } from '@/components/shop/blog-card'
 import { PageLayout } from '@/components/layout/page-layout'
 import { DealSlider } from '@/components/shop/deal-slider'
+import { HeroDealSlider } from '@/components/shop/hero-deal-slider'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
@@ -77,44 +78,46 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-primary/5">
         <div className="container mx-auto px-4 py-16 md:py-24">
-          <div className="max-w-3xl">
-            <Badge className="mb-4" variant="secondary">
-              <Sparkles className="mr-1 h-3 w-3" />
-              New Arrivals Available
-            </Badge>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-              Discover the Future of Technology Today
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8">
-              Shop the latest electronics, gadgets, and tech accessories at unbeatable prices. 
-              Free shipping on orders over $50.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/category/electronics">
-                <Button size="lg" className="w-full sm:w-auto">
-                  Shop Now <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-              <Link href="/deals">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto">
-                  View Deals
-                </Button>
-              </Link>
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+            {/* Left: Hero Content */}
+            <div className="max-w-3xl">
+              <Badge className="mb-4" variant="secondary">
+                <Sparkles className="mr-1 h-3 w-3" />
+                New Arrivals Available
+              </Badge>
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+                Discover the Future of Technology Today
+              </h1>
+              <p className="text-lg md:text-xl text-muted-foreground mb-8">
+                Shop the latest electronics, gadgets, and tech accessories at unbeatable prices. 
+                Free shipping on orders over $50.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/category/electronics">
+                  <Button size="lg" className="w-full sm:w-auto">
+                    Shop Now <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link href="/deals">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto">
+                    View Deals
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right: Compact Flash Deals Slider */}
+            <div className="hidden lg:block relative">
+              <div className="sticky top-24">
+                <HeroDealSlider deals={flashDeals} />
+              </div>
             </div>
           </div>
         </div>
         
-        {/* Decorative Elements */}
-        <div className="absolute right-0 top-0 h-full w-1/2 opacity-10 pointer-events-none">
-          <div className="absolute right-20 top-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
-          <div className="absolute right-40 bottom-20 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
-        </div>
-      </section>
-
-      {/* Flash Deals Slider in Hero Area */}
-      <section className="py-8 md:py-12 bg-background/50 border-b">
-        <div className="container mx-auto px-4">
-          <DealSlider deals={flashDeals} />
+        {/* Mobile: Show slider below content */}
+        <div className="lg:hidden mt-10 px-4">
+          <HeroDealSlider deals={flashDeals} />
         </div>
       </section>
 
